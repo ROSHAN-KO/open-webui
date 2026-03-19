@@ -8,12 +8,15 @@ services:
     volumes:
       - ./backend:/app/backend
       - pip_cache:/root/.cache/pip
+    environment:
+      - PORT=8080
+      - WEBUI_NAME=KoGPT
     ports:
-      - "8090:8080"
+      - "8080:8080"
     command: >
       bash -c "apt-get update && apt-get install -y libmariadb-dev gcc python3-dev && 
       pip install --upgrade pip && 
-      pip install --no-cache-dir -r requirements.txt && 
+      pip install -r requirements.txt && 
       sh dev.sh"
 
   kooptima-frontend:
@@ -27,5 +30,10 @@ services:
     ports:
       - "5173:5173"
     environment:
-      - OPEN_WEBUI_BACKEND_URL=http://kooptima-backend:8090
+      - OPEN_WEBUI_BACKEND_URL=http://kooptima-backend:8080
+      - WEBUI_NAME=KoGPT
     command: bash -c "npm install --legacy-peer-deps && npm run dev -- --host 0.0.0.0 --force"
+
+volumes:
+  pip_cache:
+  npm_cache:

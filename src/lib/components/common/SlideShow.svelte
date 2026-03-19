@@ -3,17 +3,18 @@
 	import { onMount } from 'svelte';
 
 	export let imageUrls = [
-		`${WEBUI_BASE_URL}/assets/images/adam.jpg`,
-		`${WEBUI_BASE_URL}/assets/images/galaxy.jpg`,
-		`${WEBUI_BASE_URL}/assets/images/earth.jpg`,
-		`${WEBUI_BASE_URL}/assets/images/space.jpg`
+		`${WEBUI_BASE_URL}/assets/images/doflamingo.jpg`,
+		`${WEBUI_BASE_URL}/assets/images/Luffy_vs_Lucchi.jpg`,
+		`${WEBUI_BASE_URL}/assets/images/sanji_water7.jpg`,
+		`${WEBUI_BASE_URL}/assets/images/Whitebeard.jpg`
 	];
 	export let duration = 5000;
 	let selectedImageIdx = 0;
 
 	onMount(() => {
 		setInterval(() => {
-			selectedImageIdx = (selectedImageIdx + 1) % (imageUrls.length - 1);
+			// Removed the "- 1" so it loops through all 4 images perfectly
+			selectedImageIdx = (selectedImageIdx + 1) % imageUrls.length;
 		}, duration);
 	});
 </script>
@@ -33,8 +34,8 @@
 		width: 100%;
 		height: 100%;
 		background-size: cover;
-		background-position: center; /* Center the background images */
-		transition: opacity 1s ease-in-out; /* Smooth fade effect */
-		opacity: 0; /* Make images initially not visible */
+		background-position: center;
+		transition: opacity 1s ease-in-out;
+		opacity: 0;
 	}
 </style>
